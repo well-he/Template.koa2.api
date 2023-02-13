@@ -1,5 +1,4 @@
 const Koa = require('koa');
-const app = new Koa();
 const json = require('koa-json');
 const onerror = require('koa-onerror');
 const bodyparser = require('koa-bodyparser');
@@ -7,6 +6,7 @@ const log4js = require('./utils/logger');
 const users = require('./routes/users');
 const router = require('koa-router')();
 
+const app = new Koa();
 // error handler
 onerror(app);
 
@@ -27,7 +27,6 @@ app.use(async (ctx, next) => {
     log4js.info(`${ctx.method} ${ctx.url} - ${ctx.response.status}`);
 });
 
-
 // routes
 router.prefix('/api'); //一级路由
 router.use(users.routes(), users.allowedMethods());
@@ -37,5 +36,4 @@ app.use(router.routes(), router.allowedMethods());
 app.on('error', (err, ctx) => {
     log4js.error(`${err.stack}`);
 });
-
 module.exports = app;

@@ -12,6 +12,7 @@ const CODES = {
     AUTH_ERROR: 50001, //认证失败或TOKEN过期
 };
 module.exports = {
+    CODES,
     /**
      * 分页结构封装
      * @param {number} pageNum

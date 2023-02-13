@@ -1,0 +1,33 @@
+##需要vscode安装插件 REST Client
+
+@base_url = http://localhost:3001/api
+
+###注册
+POST {{base_url}}/users/registry HTTP/1.1
+content-type: application/json
+
+{
+    "userEmail":"test@163.com",
+    "userPwd":"123456"
+}
+
+###登录
+
+POST {{base_url}}/users/login HTTP/1.1
+content-type: application/json
+
+{
+    "userEmail":"test@163.com",
+    "userPwd":"12345"
+}
+
+
+###修改密码
+
+PUT {{base_url}}/users/password HTTP/1.1
+content-type: application/json
+
+{
+    "userEmail":"test@163.com",
+    "userPwd":"12345"
+}
