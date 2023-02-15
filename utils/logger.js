@@ -14,8 +14,8 @@ const levels = {
 };
 
 log4js.configure({
+    //追加器
     appenders: {
-        //追加器
         console: {
             type: 'console',
         },
@@ -30,6 +30,7 @@ log4js.configure({
             alwaysIncludePattern: true,
         },
     },
+    //日志种类
     categories: {
         default: {
             appenders: ['console'],

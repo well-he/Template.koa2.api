@@ -18,6 +18,7 @@
         "koa-router": "^7.4.0",
         "koa-static": "^5.0.0",
         "koa-views": "^6.2.0",
+        "koa2-cors": "^2.0.6",
         "log4js": "^6.4.2",
         "mongoose": "^6.2.5",
         "pug": "^2.0.3"

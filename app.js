@@ -5,7 +5,7 @@ const bodyparser = require('koa-bodyparser');
 const log4js = require('./utils/logger');
 const users = require('./routes/users');
 const router = require('koa-router')();
-
+const cors = require('koa2-cors');
 const app = new Koa();
 // error handler
 onerror(app);
@@ -20,7 +20,7 @@ app.use(
 );
 app.use(json());
 app.use(require('koa-static')(__dirname + '/public'));
-
+app.use(cors());
 // logger
 app.use(async (ctx, next) => {
     await next();
