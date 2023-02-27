@@ -1,12 +1,13 @@
 const User = require('../model/userSchema');
-const { success, fail } = require('../utils/util');
+const {success, fail} = require('../utils/util');
 const log = require('../utils/logger');
 const util = require('../utils/util');
+
 class UserController {
     //登录
     static async getUserByUserName(ctx) {
         try {
-            const { userName, userPwd } = ctx.request.body;
+            const {userName, userPwd} = ctx.request.body;
             log.info(`用户登录:[userName:${userName},password:${userPwd}]`);
             const user = await User.findOne({
                 userName,
@@ -23,10 +24,11 @@ class UserController {
             log.error(error.msg);
         }
     }
+
     //注册
     static async registry(ctx) {
         try {
-            const { userName, userPwd } = ctx.request.body;
+            const {userName, userPwd, userEmail, mobile} = ctx.request.body;
             log.info(`注册用户信息:[userName:${userName}, password:${userPwd}]`);
 
             const check = await User.findOne({
@@ -40,6 +42,9 @@ class UserController {
             let user = new User({
                 userName: userName,
                 userPwd: userPwd,
+                userEmail: userEmail,
+                sex: '',
+                mobile: '',
             });
             user = await user.save();
             ctx.body = success(user, '注册成功');
@@ -48,12 +53,13 @@ class UserController {
             log.error(error.msg);
         }
     }
+
     //修改密码
     static async modifyPwd(ctx) {
         try {
-            const { userName, userPwd } = ctx.request.body;
+            const {userName, userPwd} = ctx.request.body;
             log.info(`用户[${userName}]修改密码`);
-            const res = await User.updateOne({ userName: userName }, { userPwd: userPwd });
+            const res = await User.updateOne({userName: userName}, {userPwd: userPwd});
             if (res) {
                 ctx.body = success(res, '修改成功');
             } else {
@@ -64,9 +70,10 @@ class UserController {
             log.error(err.msg);
         }
     }
+
     static async users(ctx) {
         try {
-            const res = await User.find();
+            const res = await User.find({});
             if (res) {
                 ctx.body = success(res, '查询成功');
             } else {
@@ -78,4 +85,5 @@ class UserController {
         }
     }
 }
+
 module.exports = UserController;
